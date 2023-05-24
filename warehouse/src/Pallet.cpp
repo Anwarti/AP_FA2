@@ -1,6 +1,7 @@
-#include"include/Pallet.hpp"
+#include"../src/include/Pallet.hpp"
 
-Pallet::Pallet(int itemCount, std::string itemName, int itemCapacity)
+
+Pallet::Pallet(std::string itemName, int itemCapacity, int itemCount)
     : itemCount(itemCount), itemName(itemName), itemCapacity(itemCapacity) {}
 
 
