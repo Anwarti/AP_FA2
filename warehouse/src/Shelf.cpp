@@ -11,15 +11,15 @@ Shelf::Shelf() {
 
 bool Shelf::swapPallet(int slot1, int slot2) {
     if (slot1 >= 0 && slot1 < pallets.size() && slot2 >= 0 && slot2 < pallets.size()) {
-        // Geldige slotnummers
-        // Voer de gewenste logica uit
         std::swap(pallets[slot1], pallets[slot2]);
         return true;
     } else {
-        // Ongeldige slotnummers
         return false;
     }
+}
 
+std::array<Pallet, 4>& Shelf::getPallets() {
+    return pallets;
 }
 
 bool Shelf::isEmpty() {
@@ -30,6 +30,7 @@ bool Shelf::isEmpty() {
     }
     return true;
 }
+
 bool Shelf::isFull() {
     for (int i = 0; i < pallets.size(); i++) {
         if (pallets[i].getItemCount() < pallets[i].getItemcapacity()) {
