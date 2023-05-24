@@ -10,7 +10,7 @@ class Pallet : public IContainer {
 
     public:
         Pallet();
-        Pallet(std::string itemName, int itemCapacity, int itemCount);
+        Pallet(std::string itemName, int itemCapacity, int itemCount = 0);
 
         std::string getItemName();
         int getItemcapacity();
