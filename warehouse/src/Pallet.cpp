@@ -7,11 +7,17 @@ Pallet::Pallet()
 Pallet::Pallet(std::string itemName, int itemCapacity, int itemCount)
     : itemCount(itemCount), itemName(itemName), itemCapacity(itemCapacity) {}
 
-std::string Pallet::getItemName()
+std::string Pallet::getItemName() const
 {
     return itemName;
 }
 
+void Pallet::removeItem(int count)
+{
+    if(itemCount>=count){
+    itemCount -= count;
+    }
+}
 int Pallet::getItemcapacity()  
 {
     return itemCapacity;

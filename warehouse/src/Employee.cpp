@@ -13,9 +13,9 @@ bool Employee::getBusy()
     return busy;
 }
 
-void Employee::setBusy(bool isBusy)
+void Employee::setBusy(bool busy)
 {
-    busy = isBusy;
+    Employee::busy = busy;
 }
 
 bool Employee::getForkliftCertificate()
@@ -25,5 +25,5 @@ bool Employee::getForkliftCertificate()
 
 void Employee::setForkliftCertificate(bool forkliftCertificate)
 {
-    this->forkliftCertificate = forkliftCertificate;
-};
+    Employee::forkliftCertificate = forkliftCertificate;
+}

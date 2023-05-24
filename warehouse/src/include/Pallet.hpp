@@ -16,6 +16,7 @@ class Pallet : public IContainer {
         Pallet(std::string itemName, int itemCapacity, int itemCount = 0);
 
         std::string getItemName();
+        void removeItem(int count);
         int getItemcapacity();
         int getItemCount();
         int getRemainingSpace();
