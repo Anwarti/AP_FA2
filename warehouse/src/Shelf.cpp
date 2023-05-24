@@ -1,6 +1,6 @@
 #include "include/Shelf.hpp"
 #include "include/Pallet.hpp"
-#include "Pallet.cpp"
+
 
 Shelf::Shelf() {
     // Initialize all pallets with itemCount of 0
