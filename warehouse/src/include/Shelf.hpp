@@ -6,11 +6,11 @@
 class Shelf:public IContainer
 {
     private:
-        std::array<Pallet, 4>pallets;
+        std::array<Pallet, 4> pallets;
     public:
         Shelf();
         bool swapPallet(int slot1, int slot2);
+        std::array<Pallet, 4>& getPallets();
         bool isEmpty() override;
         bool isFull() override;
-
 };

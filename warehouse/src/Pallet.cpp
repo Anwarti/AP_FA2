@@ -1,9 +1,11 @@
 #include"../src/include/Pallet.hpp"
 
 
+Pallet::Pallet()
+    : itemCount(0), itemName(""), itemCapacity(0) {}
+
 Pallet::Pallet(std::string itemName, int itemCapacity, int itemCount)
     : itemCount(itemCount), itemName(itemName), itemCapacity(itemCapacity) {}
-
 
 std::string Pallet::getItemName()
 {
@@ -36,14 +38,12 @@ bool Pallet::isFull()
     return itemCount == itemCapacity;
 }
 
-
-
 bool Pallet::reallocateEmptyPallet(std::string itemName, int itemCapacity)
 {
     if (isEmpty())
     {
-        this -> itemName = itemName;
-        this -> itemCapacity = itemCapacity;
+        this->itemName = itemName;
+        this->itemCapacity = itemCapacity;
         return true;
     }
     else
@@ -76,4 +76,4 @@ bool Pallet::putOne()
     {
         return false;
     }
-};
+}
