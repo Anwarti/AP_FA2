@@ -1,65 +1,53 @@
 #include "include/WareHouse.hpp"
-#include "include/Employee.hpp"
-#include "../src/include/Employee.hpp" 
+#include <vector>
+#include <algorithm>
 
-Warehouse::Warehouse() {}
-
-void Warehouse::addEmployee(const Employee& employee) {
-    employees.push_back(employee);
-}
+ 
 
 void Warehouse::addShelf(const Shelf& shelf) {
     shelves.push_back(shelf);
 }
 
-bool Warehouse::rearrangeShelf(Shelf& shelf) {
-    // Check if there is an available employee with forkliftCertificate
-    bool employeeAvailable = false;
-    for (const auto& employee : employees) {
-        if (employee.getForkliftCertificate() && !employee.getBusy()) {
-            employeeAvailable = true;
-            employee.setBusy(true);
-            break;
-        }
-    }
-
-    if (!employeeAvailable) {
-        return false; // No available employee with forkliftCertificate
-    }
-
-    // Rearrange the pallets on the shelf
-    bool rearranged = shelf.rearrangePallets();
-    if (rearranged) {
-        // Release the employee once the rearrangement is done
-        for (auto& employee : employees) {
-            if (employee.getBusy()) {
-                employee.setBusy(false);
-                break;
-            }
-        }
-    }
-
-    return rearranged;
+void Warehouse::addEmployee(const Employee& employee) {
+    employees.push_back(employee);
 }
 
-bool Warehouse::pickItems(const std::string& itemName, int itemCount) {
-    int remainingCount = itemCount;
+bool Warehouse::rearrangeShelf(Shelf& shelf) {
+    // Check if there is a certified and available employee
+    auto it = std::find_if(employees.begin(), employees.end(), [](const Employee& employee) {
+        return employee.isCertified() && !employee.isBusy();
+    });
 
-    // Iterate over all shelves
+    if (it == employees.end()) {
+        // No certified and available employee found
+        return false;
+    }
+
+    // Mark the employee as busy
+    it->setBusy(true);
+
+    // Sort the pallets on the shelf by item count
+    std::sort(shelf.pallets.begin(), shelf.pallets.end(), [](const Pallet& a, const Pallet& b) {
+        return a.getItemCount() < b.getItemCount();
+    });
+
+    // Mark the employee as not busy
+    it->setBusy(false);
+
+    return true;
+}
+
+bool Warehouse::pickItem(const std::string& itemName, int count) {
+    // Find a pallet with the requested item
     for (auto& shelf : shelves) {
-        // Iterate over all pallets on the shelf
-        for (auto& pallet : shelf.getPallets()) {
-            if (pallet.getItemName() == itemName) {
-                while (remainingCount > 0 && pallet.takeOne()) {
-                    remainingCount--;
-                }
-            }
-
-            if (remainingCount == 0) {
-                return true; // All items have been picked
+        for (auto& pallet : shelf.pallets) {
+            if (pallet.getName() == itemName && pallet.getItemCount() >= count) {
+                pallet.removeItem(count);
+                return true;
             }
         }
     }
 
-    return false; // Not enough items of the specified itemName available
+    // No pallet with enough requested items was found
+    return false;
 }
