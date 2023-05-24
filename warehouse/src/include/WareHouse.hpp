@@ -11,8 +11,8 @@ class Warehouse {
     public:
         Warehouse();
 
-        void addEmployee(const Employee& employee);
-        void addShelf(const Shelf& shelf);
+        void addEmployee(Employee& employee);
+        void addShelf(Shelf& shelf);
         bool rearrangeShelf(Shelf& shelf);
         bool pickItems(const std::string& itemName, int itemCount);
 };
