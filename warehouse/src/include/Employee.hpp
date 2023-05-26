@@ -1,13 +1,10 @@
-
-
 #include <string>
 
 
 class Employee
 {
     private:
-
-        const std :: string _name;
+        std :: string _name;
         bool busy;
         bool forkliftCertificate;
 
@@ -21,15 +18,8 @@ class Employee
 
         void setBusy(bool busy);
 
-        bool getForkliftCertificate();
+        bool getForkliftCertificate() const;
 
         void setForkliftCertificate(bool forkliftCertificate);
-
-
-
-
-
-        
-
-
 };
+
