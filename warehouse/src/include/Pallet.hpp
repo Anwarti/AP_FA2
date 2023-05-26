@@ -1,9 +1,8 @@
-
-
-
+#pragma once
 #include"IContainer.hpp"
 #include<string>
 #include<iostream>
+
 
 class Pallet : public IContainer {
     private:
@@ -14,9 +13,8 @@ class Pallet : public IContainer {
     public:
         Pallet();
         Pallet(std::string itemName, int itemCapacity, int itemCount = 0);
-
         std::string getItemName();
-        void removeItem(int count);
+        // void removeItem(int count);
         int getItemcapacity();
         int getItemCount();
         int getRemainingSpace();
