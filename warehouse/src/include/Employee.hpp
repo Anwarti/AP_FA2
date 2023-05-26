@@ -18,7 +18,7 @@ class Employee
 
         void setBusy(bool busy);
 
-        bool getForkliftCertificate() const;
+        bool getForkliftCertificate();
 
         void setForkliftCertificate(bool forkliftCertificate);
 };
