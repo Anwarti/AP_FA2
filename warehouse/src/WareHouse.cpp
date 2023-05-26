@@ -56,20 +56,33 @@ bool Warehouse::rearrangeShelf(Shelf& shelf) {
     }
 
 bool Warehouse::pickItems(const std::string& itemName, int itemCount) {
+    std::cout << "Picking items: " << itemName << ", " << itemCount << std::endl;
+
     for (Shelf& shelf : shelves) {
         for (Pallet& pallet : shelf.getPallets()) {
+            std::cout << "contrleer pallet: " << pallet.getItemName() << ", " << pallet.getItemCount() << std::endl;
+
             if (pallet.getItemName() == itemName && itemCount > 0) {
+                std::cout << "kies item uit het pallet: " << pallet.getItemName() << std::endl;
+                std::cout << "aantal huidig items: " << pallet.getItemCount() << std::endl;
+
                 while (pallet.takeOne() && itemCount > 0) {
+                    std::cout << "neem één item van uit het pallet" << std::endl;
                     itemCount--;
                 }
+
+                std::cout << "bijgewerkte aantal items: " << pallet.getItemCount() << std::endl;
             }
+
             if (itemCount == 0) {
                 return true;
             }
         }
     }
+
     return false;
 }
+
 
 
 

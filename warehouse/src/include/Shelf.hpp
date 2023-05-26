@@ -13,10 +13,11 @@
  */
 class Shelf
 {
-    private:
+  
+       
+    public:
         std::array<Pallet, 4> pallets; ///< Het aantal pallets op het schap
 
-    public:
         /**
          * @brief Standaardconstructor voor Shelf
          */
