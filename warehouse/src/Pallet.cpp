@@ -1,4 +1,4 @@
-#include"incloude/Pallet.hpp"
+#include"include/Pallet.hpp"
 
 
 Pallet::Pallet()
@@ -7,17 +7,12 @@ Pallet::Pallet()
 Pallet::Pallet(std::string itemName, int itemCapacity, int itemCount)
     : itemCount(itemCount), itemName(itemName), itemCapacity(itemCapacity) {}
 
-std::string Pallet::getItemName() const
+std::string Pallet::getItemName()
 {
     return itemName;
 }
 
-void Pallet::removeItem(int count)
-{
-    if(itemCount>=count){
-    itemCount -= count;
-    }
-}
+
 int Pallet::getItemcapacity()  
 {
     return itemCapacity;
