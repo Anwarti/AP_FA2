@@ -1,3 +1,7 @@
+#ifndef PALLET_HPP
+#define PALLET_HPP
+
+
 #include"IContainer.hpp"
 #include<string>
 #include<iostream>
@@ -79,3 +83,5 @@ class Pallet : public IContainer {
          */
         bool isFull() override;
 };
+
+#endif // PALLET_HPP

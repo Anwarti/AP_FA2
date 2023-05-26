@@ -235,3 +235,43 @@ TEST_CASE("Rearrange shelf with quallified, but busy, employee", "Warehouse::rea
     REQUIRE(warehouse.shelves[0].pallets[2].getItemCount() == 30);
     REQUIRE(warehouse.shelves[0].pallets[3].getItemCount() == 10);
 }
+
+
+///////////////////////////////////////////////////////////////
+//           Warehouse::pickItems testgevallen               //
+///////////////////////////////////////////////////////////////
+
+TEST_CASE("Items kiezen met voldoende voorraad", "Warehouse::pickItems"){
+    Warehouse magazijn = createMockWarehouse();
+
+    std::string item_naam = "Boeken";
+    int item_aantal = 80;
+    int start_aantal = magazijn.getItemCount(item_naam);
+
+    bool gelukt = magazijn.pickItems(item_naam, item_aantal);
+    REQUIRE(gelukt);
+    REQUIRE(magazijn.getItemCount(item_naam) == start_aantal - item_aantal);
+}
+
+TEST_CASE("Items kiezen met onvoldoende voorraad", "Warehouse::pickItems"){
+    Warehouse magazijn = createMockWarehouse();
+
+    std::string item_naam = "Dozen";
+    int item_aantal = 100;
+    int start_aantal = magazijn.getItemCount(item_naam);
+
+    bool gelukt = magazijn.pickItems(item_naam, item_aantal);
+    REQUIRE(!gelukt);
+    REQUIRE(magazijn.getItemCount(item_naam) == start_aantal);
+}
+
+TEST_CASE("Items kiezen die niet bestaan in magazijn", "Warehouse::pickItems"){
+    Warehouse magazijn = createMockWarehouse();
+
+    std::string item_naam = "Stoelen";
+    int item_aantal = 10;
+
+    bool gelukt = magazijn.pickItems(item_naam, item_aantal);
+    REQUIRE(!gelukt);
+    REQUIRE_THROWS_AS(magazijn.getItemCount(item_naam), std::exception);
+}
